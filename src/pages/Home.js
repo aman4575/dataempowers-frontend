@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_BASE, toUrl } from "../utils/helpers";
+import { API_BASE } from "../utils/helpers";
 import Card from "../components/Card";
 import { Link } from "react-router-dom";
 
