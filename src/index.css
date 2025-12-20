@@ -12,5 +12,6 @@
 @tailwind utilities;
 
 body {
-  @apply font-inter text-brandDark bg-white;
+  @apply font-sans text-brand-dark bg-white;
+  
 }

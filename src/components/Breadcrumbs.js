@@ -1,28 +1,34 @@
+// src/components/Breadcrumbs.js
 import { Link } from "react-router-dom";
 
-export default function Breadcrumbs({ paths }) {
+export default function Breadcrumbs({ paths = [] }) {
+  if (!paths || paths.length === 0) return null;
+
   return (
-    <nav className="mb-6" aria-label="Breadcrumb">
-      <ol className="flex items-center space-x-2 text-sm text-gray-600">
-        {paths.map((path, index) => (
-          <li key={index} className="flex items-center">
-            {path.to ? (
-              <Link
-                to={path.to}
-                className="text-blue-600 hover:underline font-medium"
-              >
-                {path.label}
-              </Link>
-            ) : (
-              <span className="font-semibold text-gray-800">
-                {path.label}
-              </span>
-            )}
-            {index < paths.length - 1 && (
-              <span className="mx-2 text-gray-400">›</span>
-            )}
-          </li>
-        ))}
+    <nav className="text-sm text-gray-500" aria-label="Breadcrumb">
+      <ol className="flex flex-wrap items-center gap-1">
+        {paths.map((item, index) => {
+          const isLast = index === paths.length - 1;
+
+          return (
+            <li key={index} className="flex items-center">
+              {index > 0 && <span className="mx-1 text-gray-400">›</span>}
+
+              {item.to && !isLast ? (
+                <Link
+                  to={item.to}
+                  className="hover:underline text-brand-primary"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <span className="font-medium text-gray-700">
+                  {item.label}
+                </span>
+              )}
+            </li>
+          );
+        })}
       </ol>
     </nav>
   );

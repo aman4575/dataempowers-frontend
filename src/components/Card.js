@@ -1,9 +1,20 @@
+// src/components/Card.js
 export default function Card({ title, content, children }) {
   return (
-    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition p-6 flex flex-col">
-      <h3 className="text-xl font-semibold text-blue-700 mb-3">{title}</h3>
-      <p className="text-gray-700 flex-grow mb-4">{content}</p>
-      <div className="mt-auto">{children}</div>
+    <div className="bg-white shadow-sm rounded-xl p-6 border border-gray-100 hover:shadow-md hover:border-brand-primary/30 transition">
+      {title && (
+        <h3 className="text-lg md:text-xl font-semibold text-brand-primary mb-2">
+          {title}
+        </h3>
+      )}
+
+      {content && (
+        <p className="text-gray-700 text-sm md:text-base mb-4 leading-relaxed">
+          {content}
+        </p>
+      )}
+
+      {children}
     </div>
   );
 }

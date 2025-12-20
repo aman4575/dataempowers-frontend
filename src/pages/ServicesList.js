@@ -1,3 +1,4 @@
+// src/pages/ServicesList.js
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_BASE } from "../utils/helpers";
@@ -5,6 +6,11 @@ import { Link } from "react-router-dom";
 
 export default function ServicesList() {
   const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    document.title = "Services | Data & AI Empowers";
+  }, []);
+
 
   useEffect(() => {
     axios
@@ -17,36 +23,60 @@ export default function ServicesList() {
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-20 mt-20">
-      <h1 className="text-3xl font-bold text-blue-800 mb-10 text-center">
-        Our Services
-      </h1>
+    <main className="mt-20 bg-white">
+      <section className="max-w-6xl mx-auto px-6 py-16">
+        {/* Page Header */}
+        <header className="text-center mb-10">
+          <p className="text-xs font-semibold tracking-[0.18em] text-brand-primary uppercase">
+            Services
+          </p>
+          <h1 className="mt-3 text-3xl md:text-4xl font-bold text-brand-primary">
+            Our Services
+          </h1>
+          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+            Strategic advisory, applied research, and implementation support for
+            Responsible AI, data governance, NLP solutions, and digital public
+            infrastructure.
+          </p>
+        </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {services.map((service) => (
-          <div
-            key={service.id}
-            className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition"
-          >
-            <h2 className="text-xl font-semibold text-blue-700 mb-3">
-              <Link to={`/services/${service.slug}`} className="hover:underline">
-                {service.title}
-              </Link>
-            </h2>
-            <p className="text-gray-700 mb-4">
-              {service.summary?.length > 120
-                ? service.summary.slice(0, 120) + "…"
-                : service.summary}
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {services.length > 0 ? (
+            services.map((service) => (
+              <div
+                key={service.id}
+                className="bg-white shadow-sm rounded-xl p-6 border border-gray-100 hover:shadow-md hover:border-brand-primary/30 transition"
+              >
+                <h2 className="text-lg md:text-xl font-semibold text-brand-primary mb-2">
+                  <Link
+                    to={`/services/${service.slug}`}
+                    className="hover:underline"
+                  >
+                    {service.title}
+                  </Link>
+                </h2>
+                <p className="text-gray-700 text-sm md:text-base mb-4 leading-relaxed">
+                  {service.summary?.length > 140
+                    ? service.summary.slice(0, 140) + "…"
+                    : service.summary}
+                </p>
+                <Link
+                  to={`/services/${service.slug}`}
+                  className="inline-flex items-center text-sm font-medium text-brand-primary hover:text-brand-dark"
+                >
+                  Learn more
+                  <span className="ml-1">→</span>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p className="col-span-1 md:col-span-3 text-center text-gray-500">
+              No services listed yet.
             </p>
-            <Link
-              to={`/services/${service.slug}`}
-              className="text-blue-600 hover:underline text-sm"
-            >
-              Learn more →
-            </Link>
-          </div>
-        ))}
-      </div>
-    </div>
+          )}
+        </div>
+      </section>
+    </main>
   );
 }

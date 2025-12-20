@@ -1,3 +1,4 @@
+// src/components/ServiceCard.js
 import React from "react";
 import { Link } from "react-router-dom";
 import { toUrl } from "../utils/helpers";
@@ -6,22 +7,23 @@ export default function ServiceCard({ service }) {
   const onepagerUrl = service.onepager ? toUrl(service.onepager) : null;
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition">
-      <h3 className="text-xl font-semibold text-blue-800 mb-2">
+    <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md hover:border-brand-primary/30 transition">
+      <h3 className="text-lg md:text-xl font-semibold text-brand-primary mb-2">
         <Link to={`/services/${service.slug}`} className="hover:underline">
           {service.title}
         </Link>
       </h3>
-      <p className="text-gray-700 mb-4">
+
+      <p className="text-gray-700 text-sm md:text-base mb-4 leading-relaxed">
         {service.summary?.length > 140
           ? service.summary.slice(0, 140) + "…"
           : service.summary}
       </p>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-3">
         <Link
           to={`/services/${service.slug}`}
-          className="text-sm text-blue-600 hover:underline"
+          className="text-sm font-medium text-brand-primary hover:text-brand-dark hover:underline"
         >
           Learn more →
         </Link>
@@ -31,7 +33,7 @@ export default function ServiceCard({ service }) {
             href={onepagerUrl}
             target="_blank"
             rel="noreferrer"
-            className="text-sm font-medium text-blue-600"
+            className="text-xs md:text-sm font-medium text-brand-primary hover:text-brand-dark hover:underline"
           >
             📄 One-pager
           </a>
