@@ -1,5 +1,5 @@
 // src/components/Navbar.js
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   const linkClasses = ({ isActive }) =>
@@ -12,15 +12,16 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur shadow-sm z-50">
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
-        {/* Brand */}
-        <Link
-          to="/"
-          className="text-lg md:text-xl font-bold tracking-tight text-brand-primary"
-        >
-          Data &amp; AI{" "}
-          <span className="font-extrabold text-brand-accent">Empowers</span>
-        </Link>
+      <div className="max-w-6xl mx-auto px-4 md:px-6 min-h-[72px] flex items-center justify-between">
+        
+        {/* Brand Logo */}
+        <NavLink to="/" className="flex items-center">
+          <img
+            src="/logo.svg"
+            alt="Data & AI Empowers"
+            className="h-11 md:h-12 w-auto"
+          />
+        </NavLink>
 
         {/* Navigation */}
         <div className="flex items-center gap-4 md:gap-6">
